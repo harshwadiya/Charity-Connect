@@ -1,0 +1,29 @@
+<div *ngIf="state.visible" class="popup-overlay">
+
+    <div class="popup-box"
+         [class.success]="state.type==='success'"
+         [class.error]="state.type==='error'"
+         [class.confirm]="state.type==='confirm'">
+  
+      <!-- Icon -->
+      <div class="popup-icon">
+        <span *ngIf="state.type==='success'">✓</span>
+        <span *ngIf="state.type==='error'">!</span>
+        <span *ngIf="state.type==='confirm'">?</span>
+      </div>
+  
+      <!-- Title & Message -->
+      <h3>{{ state.title }}</h3>
+      <p>{{ state.message }}</p>
+  
+      <!-- Success / Error: single OK button -->
+      <button *ngIf="state.type!=='confirm'" class="btn-ok" (click)="onClose()">OK</button>
+  
+      <!-- Confirm: Yes / No buttons -->
+      <div *ngIf="state.type==='confirm'" class="btn-group">
+        <button class="btn-yes" (click)="onYes()">Yes, Continue</button>
+        <button class="btn-no" (click)="onClose()">Cancel</button>
+      </div>
+  
+    </div>
+  </div>

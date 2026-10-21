@@ -1,0 +1,193 @@
+/* ==========================
+   POPUP OVERLAY
+========================== */
+
+.popup-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(13,34,63,.55);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    animation:fadeIn .3s ease;
+    font-family:'Poppins',sans-serif;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+/* ==========================
+   POPUP BOX
+========================== */
+
+.popup-box{
+    background:white;
+    padding:40px 45px 35px;
+    border-radius:24px;
+    text-align:center;
+    min-width:360px;
+    max-width:90%;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+    animation:popIn .4s ease;
+    position:relative;
+}
+
+@keyframes popIn{
+    from{
+        opacity:0;
+        transform:translateY(-20px) scale(.95);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+/* Color-coded top border */
+
+.popup-box.success{
+    border-top:5px solid #2ecc71;
+}
+
+.popup-box.error{
+    border-top:5px solid #c0392b;
+}
+
+.popup-box.confirm{
+    border-top:5px solid #d8a126;
+}
+
+/* ==========================
+   ICON CIRCLE
+========================== */
+
+.popup-icon{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto 18px;
+    font-size:38px;
+    font-weight:700;
+    color:white;
+    animation:pop .4s ease;
+}
+
+.popup-box.success .popup-icon{
+    background:#2ecc71;
+}
+
+.popup-box.error .popup-icon{
+    background:#c0392b;
+}
+
+.popup-box.confirm .popup-icon{
+    background:#d8a126;
+}
+
+@keyframes pop{
+    0%{transform:scale(0);}
+    60%{transform:scale(1.2);}
+    100%{transform:scale(1);}
+}
+
+/* ==========================
+   TEXT
+========================== */
+
+.popup-box h3{
+    color:#0d223f;
+    font-size:22px;
+    margin-bottom:10px;
+    font-weight:600;
+}
+
+.popup-box p{
+    color:#555;
+    font-size:15px;
+    line-height:1.6;
+    margin-bottom:22px;
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+
+.btn-ok{
+    background:#0d223f;
+    color:white;
+    border:none;
+    padding:11px 30px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    font-family:'Poppins',sans-serif;
+}
+
+.btn-ok:hover{
+    background:#d8a126;
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(216,161,38,.25);
+}
+
+.btn-group{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+}
+
+.btn-yes,
+.btn-no{
+    border:none;
+    padding:11px 22px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    font-family:'Poppins',sans-serif;
+}
+
+.btn-yes{
+    background:#c0392b;
+    color:white;
+}
+
+.btn-yes:hover{
+    background:#a5301f;
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(192,57,43,.25);
+}
+
+.btn-no{
+    background:#e5e0d0;
+    color:#0d223f;
+}
+
+.btn-no:hover{
+    background:#0d223f;
+    color:white;
+    transform:translateY(-3px);
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:500px){
+    .popup-box{
+        padding:30px 25px;
+        min-width:280px;
+    }
+
+    .popup-box h3{
+        font-size:19px;
+    }
+}

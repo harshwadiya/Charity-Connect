@@ -1,0 +1,7 @@
+<app-navbar *ngIf="!isLoggedIn"></app-navbar>
+<app-adminnav *ngIf="isLoggedIn && userRole === 'Admin'"></app-adminnav>
+<app-usernav *ngIf="isLoggedIn && userRole === 'User'"></app-usernav>
+
+<router-outlet></router-outlet>
+<app-chatbot *ngIf="isLoggedIn"></app-chatbot>
+<app-popup></app-popup>
