@@ -1,0 +1,98 @@
+<div class="adminviewfeedback-container">
+
+  <div class="page-header">
+    <h2 class="page-title" aria-label="Feedback Details">
+      <span class="title-white">Feedback Details</span>
+    </h2>
+    <hr class="title-underline" />
+  </div>
+ <div class="loading-state" *ngIf="isLoading">
+    <div class="loader-ring"></div>
+    <p>Loading feedbacks...</p>
+  </div>
+  <div class="table-wrapper" *ngIf="!isLoading">
+    <table class="feedback-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>User Id</th>
+          <th>Feedback</th>
+          <th>Posted Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let feedback of feedbacks; let i = index"
+            [style.animation-delay]="(i * 0.05) + 's'">
+          <td class="cell-serial">{{ i + 1 }}</td>
+          <td class="cell-user">{{ feedback.userId || 'N/A' }}</td>
+          <td class="cell-feedback">{{ feedback.feedbackText }}</td>
+          <td class="cell-date">{{ feedback.date | date:'dd-MM-yyyy'}}</td>
+          <td>
+            <button
+              type="button"
+              class="btn-show-profile"
+              (click)="viewUserProfile(feedback)">
+              <span>Show Profile</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="feedbacks.length === 0">
+          <td colspan="5" class="no-records">
+            <div class="empty-inner">
+              <div class="empty-visual">
+                <div class="empty-circle"></div>
+                <div class="empty-line"></div>
+              </div>
+              <h3>Oops! No records Found</h3>
+              <p>No user feedback has been submitted yet.</p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="error-message" *ngIf="errorMessage">
+      <span class="error-bar"></span>
+      {{ errorMessage }}
+    </p>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showUserModal" (click)="closeUserModal()">
+  <div class="modal-box profile-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-icon-wrapper">
+        <div class="modal-icon-bar"></div>
+      </div>
+      <p class="modal-heading">User Details</p>
+      <button type="button" class="btn-close-x" (click)="closeUserModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18" stroke-linecap="round"/>
+          <line x1="6" y1="6" x2="18" y2="18" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div class="detail-row">
+        <span class="detail-label">Email</span>
+        <span class="detail-value">{{ selectedUser?.email || 'N/A' }}</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Username</span>
+        <span class="detail-value">{{ selectedUser?.username || 'N/A' }}</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Mobile Number</span>
+        <span class="detail-value">{{ selectedUser?.mobileNumber || 'N/A' }}</span>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn-close" (click)="closeUserModal()">Close</button>
+    </div>
+  </div>
+</div>

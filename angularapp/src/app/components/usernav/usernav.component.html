@@ -1,0 +1,107 @@
+<nav class="navbar">
+
+  <div class="navbar-shine"></div>
+
+  <div class="brand" routerLink="/user/dashboard" aria-label="CHARITY CONNECT">
+    <div class="brand-text">
+      <span class="brand-white">Charity</span>
+      <span class="brand-gold">Connect</span>
+    </div>
+  </div>
+
+  <ul class="nav-links" [class.mobile-open]="mobileMenuOpen">
+
+    <li>
+      <a routerLink="/user/dashboard"
+         routerLinkActive="active"
+         class="nav-link"
+         (click)="closeMobileMenu()">
+        Dashboard
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/user/charities"
+         routerLinkActive="active"
+         class="nav-link"
+         (click)="closeMobileMenu()">
+        Charity
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/user/mydonations"
+         routerLinkActive="active"
+         class="nav-link"
+         (click)="closeMobileMenu()">
+        My Donations
+      </a>
+    </li>
+
+    <li class="dropdown-wrapper">
+      <a class="nav-link dropdown-toggle"
+         [class.active]="showFeedbackDropdown"
+         (click)="toggleFeedbackDropdown($event)">
+        Feedback
+        <span class="dropdown-arrow" [class.rotated]="showFeedbackDropdown"></span>
+      </a>
+
+      <ul class="dropdown-menu" [class.open]="showFeedbackDropdown">
+        <li>
+          <a routerLink="/user/feedback/add"
+             class="dropdown-item"
+             (click)="closeMobileMenu()">
+            Post Feedback
+          </a>
+        </li>
+        <li>
+          <a routerLink="/user/feedback"
+             class="dropdown-item"
+             (click)="closeMobileMenu()">
+            My Feedbacks
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <div class="user-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text">
+          {{ username }} <span class="badge-role"></span>
+        </span>
+      </div>
+    </li>
+
+    <li>
+      <button type="button" class="logout-btn" (click)="confirmLogout()">
+        Logout
+      </button>
+    </li>
+  </ul>
+
+  <button type="button"
+          class="mobile-toggle"
+          [class.active]="mobileMenuOpen"
+          (click)="toggleMobileMenu()"
+          aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<div class="modal-overlay" *ngIf="showLogoutModal" (click)="cancelLogout()">
+  <div class="modal-box" (click)="$event.stopPropagation()">
+
+    <div class="modal-icon">
+      <div class="modal-icon-bar"></div>
+    </div>
+    <h3 class="modal-title">Leaving Already?</h3>
+    <p class="modal-message">Are you sure you want to logout, {{ username }}?</p>
+    <div class="modal-actions">
+      <button type="button" class="btn-confirm" (click)="logout()">Yes, Logout</button>
+      <button type="button" class="btn-cancel" (click)="cancelLogout()">Cancel</button>
+    </div>
+  </div>
+</div>

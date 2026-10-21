@@ -1,0 +1,41 @@
+<div class="chatbot-wrapper">
+
+    <div class="chat-button" (click)="toggleChat()" *ngIf="!isOpen">💬</div>
+
+    <div class="chat-box" *ngIf="isOpen">
+        <div class="chat-header">
+            <div class="header-left">
+                <div class="bot-avatar">🤖</div>
+                <div>
+                    <h4>CharityBot</h4>
+                    <small *ngIf="aiAvailable">🟢 AI Online</small>
+                    <small *ngIf="!aiAvailable">🟡 Offline Mode</small>
+                </div>
+            </div>
+            <span class="close-btn" (click)="toggleChat()">✕</span>
+        </div>
+        <div class="chat-body" #chatBody>
+            <div *ngFor="let m of messages" class="message-wrapper" [ngClass]="m.sender">
+                <div class="message" [ngClass]="m.sender">
+                    <span class="ai-badge" *ngIf="m.source === 'ai'">✨ AI</span>
+                    <div class="msg-text">{{m.text}}</div>
+                    <button *ngIf="m.route" class="route-btn" (click)="navigateTo(m.route)">{{m.routeLabel}} →</button>
+                </div>
+                <div class="suggestions" *ngIf="m.sender === 'bot' && m.suggestions && m.suggestions.length > 0">
+                    <button *ngFor="let s of m.suggestions" class="suggestion-chip" (click)="sendSuggestion(s)">{{s}}</button>
+                </div>
+            </div>
+            <div class="message bot typing" *ngIf="isTyping">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <form class="chat-input" (ngSubmit)="sendMessage()">
+            <input type="text" name="userInput" [(ngModel)]="userInput" placeholder="Ask me anything..." autocomplete="off">
+            <button type="submit" [disabled]="!userInput.trim()">
+                ➤
+            </button>
+        </form>
+    </div>
+</div>

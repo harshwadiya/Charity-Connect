@@ -1,0 +1,28 @@
+<div class="feedback-container">
+
+  <h2>Add Feedback</h2>
+
+  <div class="feedback-card">
+
+    <form #feedbackForm="ngForm" (ngSubmit)="onSubmit()">
+
+      <label>Feedback<span class="required">*</span>
+      </label>
+
+      <textarea name="feedbackText" [(ngModel)]="feedback.feedbackText" rows="8" placeholder="Write your feedback here..."></textarea>
+
+      <div class="error-msg" *ngIf="submitted && (!feedback.feedbackText || !feedback.feedbackText.trim())">*Feedback is required</div>
+
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </div>
+
+  <div *ngIf="showPopup" class="modal">
+    <div class="modal-content">
+      <h3>Successfully Added!</h3>
+      <button class="ok-btn" (click)="closePopup()">Ok</button>
+    </div>
+
+  </div>
+
+</div>

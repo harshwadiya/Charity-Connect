@@ -1,0 +1,114 @@
+<div class="user-container">
+
+  <div class="page-header">
+    
+    <h2 class="page-title">
+      <span class="title-white">Available Charities</span>
+    </h2>
+    <div class="title-underline"></div>
+  </div>
+
+ 
+  <div class="filter-bar">
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Search by charity name..."
+      [(ngModel)]="searchTerm"
+      (input)="applyFilters()"
+    />
+    <select
+      class="status-filter"
+      [(ngModel)]="statusFilter"
+      (change)="applyFilters()"
+    >
+      <option value="All">All Status</option>
+      <option value="Active">Active</option>
+      <option value="Closed">Closed</option>
+    </select>
+    <button class="clear-btn" (click)="clearFilters()">Clear</button>
+  </div>
+  <div class="loading-state" *ngIf="isLoading">
+    <div class="loader-ring"></div>
+    <p>Loading charities...</p>
+  </div>
+  <div class="empty-state" *ngIf="!isLoading && charities.length === 0">
+    <div class="empty-visual">
+      <div class="empty-circle"></div>
+      <div class="empty-line"></div>
+    </div>
+    <h3 class="empty-title">Oops! No records Found</h3>
+    <p class="empty-message">No charities are available at the moment.</p>
+  </div>
+
+  <div class="table-wrapper" *ngIf="!isLoading && charities.length > 0">
+    <table class="charity-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Charity Name</th>
+          <th>Description</th>
+          <th>Founder</th>
+          <th>Creation Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of filteredCharities; let i = index"
+            [style.animation-delay]="(i * 0.05) + 's'">
+          <td class="cell-id">#{{ i + 1 }}</td>
+          <td class="cell-name">{{ item.charityName }}</td>
+          <td class="cell-desc">{{ item.description }}</td>
+          <td class="cell-founder">{{ item.founder }}</td>
+          <td class="cell-date">{{ item.creationDate | date:'dd-MM-yyyy' }}</td>
+          <td>
+            <span class="status-pill"
+                  [class.active]="item.status === 'Active'"
+                  [class.inactive]="item.status === 'Inactive'">
+              {{ item.status }}
+            </span>
+          </td>
+          <td>
+            <button
+              class="btn-donate"
+              [disabled]="item.status !== 'Active'"
+              (click)="openDonateModal(item)">
+              Donate
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal-overlay" *ngIf="showDonateModal" (click)="closeDonateModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <div class="modal-icon-wrapper">
+          <div class="modal-icon-bar"></div>
+        </div>
+        <h3 class="modal-title">Donate to {{ selectedCharity?.charityName }}</h3>
+        <button class="btn-close-modal" (click)="closeDonateModal()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <label for="amount">Donation Amount (₹)</label>
+        <input
+          id="amount"
+          type="number"
+          [(ngModel)]="donationAmount"
+          min="1"
+          placeholder="Enter amount" />
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-modal-close" (click)="closeDonateModal()">Close</button>
+        <button class="btn-modal-donate" (click)="submitDonation()">Donate</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

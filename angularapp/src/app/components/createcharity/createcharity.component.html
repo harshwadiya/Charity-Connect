@@ -1,0 +1,84 @@
+<div class="form-container">
+
+  <div class="bg-ring"></div>
+  <div class="form-card">
+
+    <div class="form-header">
+      <h2 class="form-title">
+        <span class="title-white">{{ isEditMode ? 'Edit' : 'Create' }}</span>
+        <span class="title-gold">Charity</span>
+      </h2>
+      <p class="form-subtitle">
+        {{ isEditMode ? 'Update the charity details below' : 'Fill in the details to add a new charity' }}
+      </p>
+    </div>
+
+    <form #charityForm="ngForm" (ngSubmit)="createCharity()" novalidate>
+
+      <div class="form-group">
+        <label>Charity Name <span class="req">*</span></label>
+        <input type="text" id="charityName" name="charityName" required 
+          [(ngModel)]="newCharity.charityName" #charityNameCtrl="ngModel"
+          placeholder="Enter charity name" pattern="^[a-zA-Z0-9]([a-zA-Z0-9 ]*[a-zA-Z0-9])?$"/>
+        
+        <small class="error-msg" *ngIf="(formSubmitted || charityNameCtrl.touched) && charityNameCtrl.errors?.['required']">
+          Charity Name is required
+        </small>
+        <small class="error-msg" *ngIf="(formSubmitted || charityNameCtrl.touched) && charityNameCtrl.errors?.['pattern']">
+          Cannot start/end with a space or contain special characters
+        </small>
+      </div>
+      <div class="form-group">
+        <label>Description <span class="req">*</span></label>
+        <input type="text" id="charityDescription" name="charityDescription" required
+          [(ngModel)]="newCharity.description" #descriptionCtrl="ngModel" 
+          placeholder="Enter a short description" pattern="^[a-zA-Z0-9]([a-zA-Z0-9 .,'-]*[a-zA-Z0-9.,'-])?$"/>
+        
+        <small class="error-msg" *ngIf="(formSubmitted || descriptionCtrl.touched) && descriptionCtrl.errors?.['required']">
+          Description is required
+        </small>
+        <small class="error-msg" *ngIf="(formSubmitted || descriptionCtrl.touched) && descriptionCtrl.errors?.['pattern']">
+          Cannot start/end with a space or contain invalid characters
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label>Founder <span class="req">*</span></label>
+        <input type="text" id="charityFounder" name="charityFounder" required 
+          [(ngModel)]="newCharity.founder" #founderCtrl="ngModel"
+          placeholder="Enter founder name" pattern="^[a-zA-Z0-9]([a-zA-Z0-9 ]*[a-zA-Z0-9])?$"/>
+        
+        <small class="error-msg" *ngIf="(formSubmitted || founderCtrl.touched) && founderCtrl.errors?.['required']">
+          Founder is required
+        </small>
+        <small class="error-msg" *ngIf="(formSubmitted || founderCtrl.touched) && founderCtrl.errors?.['pattern']">
+          Cannot start/end with a space or contain special characters
+        </small>
+      </div>
+
+      <!-- Status -->
+      <div class="form-group">
+        <label>Status <span class="req">*</span></label>
+        <select name="charityStatus" id="charityStatus" [(ngModel)]="newCharity.status" #statusCtrl="ngModel" required>
+          <option value="">Select Status</option>
+          <option value="Active">Active</option>
+          <option value="Closed">Closed</option>
+        </select>
+        <small class="error-msg" *ngIf="(formSubmitted || statusCtrl.touched) && statusCtrl.errors?.['required']">
+          Status is required
+        </small>
+      </div>
+
+      <div class="all-required-banner"
+        *ngIf="formSubmitted && charityForm.invalid">
+        Please fix the errors above before submitting
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="charityForm.invalid && formSubmitted">
+        <span>{{ isEditMode ? 'Update' : 'Submit' }}</span>
+        <span class="btn-arrow">→</span>
+      </button>
+
+    </form>
+  </div>
+</div>

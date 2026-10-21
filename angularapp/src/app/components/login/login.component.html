@@ -1,0 +1,153 @@
+<div class="auth-page">
+
+  <div class="bg-blobs" aria-hidden="true">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+  </div>
+
+
+  <section class="auth-left">
+
+
+    <h1>
+      Welcome
+      <span>Back</span>
+    </h1>
+
+    <p>
+      Sign in to continue supporting causes you care about
+      and stay connected with our community of changemakers.
+    </p>
+
+    <div class="feature-list">
+
+      <div class="feature">
+        <span class="tick">✓</span>
+        <span>Access Your Dashboard</span>
+      </div>
+
+      <div class="feature">
+        <span class="tick">✓</span>
+        <span>Track Your Contributions</span>
+      </div>
+
+      <div class="feature">
+        <span class="tick">✓</span>
+        <span>Discover New Causes</span>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="card-wrap">
+
+    <div class="card-glow" aria-hidden="true"></div>
+
+    <div class="auth-card">
+
+      <div class="card-heading">
+        <div class="heading-icon">🔐</div>
+
+        <h2>Login</h2>
+
+        <p class="sub">
+          Enter your credentials to continue
+        </p>
+      </div>
+
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+
+        <div class="form-group">
+
+          <label class="field-label" for="email">
+            Email Address
+          </label>
+
+          <div class="input-wrap" [class.input-invalid]="email.invalid && email.touched">
+            <span class="icon" aria-hidden="true">✉️</span>
+
+            <input id="email" type="text" name="email" [(ngModel)]="loginModel.Email" #email="ngModel"
+              placeholder="you@example.com" autocomplete="email" required pattern="^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+          </div>
+
+          <small class="validation-message" *ngIf="email.errors?.required && email.touched">
+            Email address is required
+          </small>
+
+          <small class="validation-message" *ngIf="email.errors?.email && email.touched">
+            Please enter a valid email
+          </small>
+
+          <small class="validation-message" *ngIf="email.errors?.['pattern'] && email.touched">
+            Enter a valid email address without any spaces
+          </small>
+
+        </div>
+
+        <div class="form-group">
+
+          <label class="field-label" for="password">
+            Password
+          </label>
+
+          <div class="input-wrap" [class.input-invalid]="password.invalid && password.touched">
+            <span class="icon" aria-hidden="true">🔒</span>
+
+            <input id="password" [type]="showPassword ? 'text' : 'password'" name="password"
+              [(ngModel)]="loginModel.Password" #password="ngModel" placeholder="Enter your password"
+              autocomplete="current-password" required minlength="8" maxlength="20"
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$">
+            <!-- 👁 Show/Hide toggle -->
+            <button type="button" class="toggle-password" (click)="showPassword = !showPassword"
+              [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
+              {{ showPassword ? '🙈' : '👁️' }}
+            </button>
+          </div>
+
+          <small class="validation-message" *ngIf="password.errors?.['required'] && password.touched">
+            Password is required
+          </small>
+
+          <small class="validation-message" *ngIf="password.errors?.['pattern'] && password.touched">
+            Must be 8–20 characters with uppercase, lowercase, number & special character (@$!%*?&)
+          </small>
+        </div>
+
+        <div class="message error" role="alert" *ngIf="errorMessage">
+          <span>!</span>
+          <span>{{ errorMessage }}</span>
+        </div>
+
+        <div>
+        <re-captcha siteKey="6LdyfmMtAAAAAFAXx5W3EmCv478ZnNn1AX9Uonfu" name="captcha" [(ngModel)]="loginModel.CaptchaToken" required
+          #captcha="ngModel">
+        </re-captcha>
+        <div class="error" *ngIf="captcha.invalid && captcha.touched">
+          Please verify you are human.
+        </div>
+      </div>
+
+
+        <button class="submit-button" type="submit" [disabled]="loginForm.invalid">
+          <span>Login</span>
+          <span class="button-arrow">→</span>
+        </button>
+
+      </form>
+
+      <div class="divider">
+        <span></span>
+        <p>New here?</p>
+        <span></span>
+      </div>
+
+      <p class="bottom-link"> Don't have an account?<a routerLink="/register">Register</a>
+      </p>
+
+    </div>
+
+  </section>
+
+</div>

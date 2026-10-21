@@ -1,0 +1,55 @@
+<nav class="navbar" [class.scrolled]="isScrolled">
+
+  <div class="navbar-shine"></div>
+  <div class="brand" routerLink="/" aria-label="CHARITY CONNECT">
+    <div class="brand-text">
+      <span class="brand-white">Charity</span>
+      <span class="brand-gold">Connect</span>
+    </div>
+  </div>
+  <ul class="nav-links" [class.mobile-open]="mobileMenuOpen">
+
+    <li>
+      <a routerLink="/"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}"
+         class="nav-link"
+         (click)="closeMobileMenu()">
+        Home
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/"
+         fragment="about"
+         class="nav-link"
+         (click)="closeMobileMenu()">
+        About
+      </a>
+    </li>
+    <li>
+      <a routerLink="/login"
+         class="auth-btn"
+         (click)="closeMobileMenu()">
+        Login
+      </a>
+    </li>
+    <li>
+      <a routerLink="/register"
+         class="auth-btn"
+         (click)="closeMobileMenu()">
+        Register
+      </a>
+    </li>
+  </ul>
+
+  <button type="button"
+          class="mobile-toggle"
+          [class.active]="mobileMenuOpen"
+          (click)="toggleMobileMenu()"
+          aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>

@@ -1,0 +1,113 @@
+<div class="mydonation-container">
+
+    <div class="page-header">
+
+      <h2 class="page-title">
+        <span class="title-white">My Donations</span>
+      </h2>
+      <h3 style="position: absolute; left:-9999px">Donation Details</h3>
+      <div class="title-underline"></div>
+    </div>
+
+    <div class="loading-state" *ngIf="isLoading">
+      <div class="loader-ring"></div>
+      <p>Loading your donations...</p>
+    </div>
+
+    <div class="empty-state" *ngIf="!isLoading && donations.length === 0">
+      
+      <h3 class="empty-title">Oops! No records Found</h3>
+      <p class="empty-message">You haven't made any donations yet. Start making a difference today!</p>
+    </div>
+   <div class="table-wrapper" *ngIf="!isLoading && donations.length > 0">
+      <table class="donation-table">
+        <thead>
+          <tr>
+            <th>Donation Id</th>
+            <th>Charity Id</th>
+            <th>Amount</th>
+            <th>Donation Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let donation of donations; let i = index"
+              [style.animation-delay]="(i * 0.05) + 's'">
+            <td class="cell-id">#{{ donation.donationId }}</td>
+            <td class="cell-charity">
+              <span class="charity-chip">{{ donation.charityId || 'Deleted' }}</span>
+            </td>
+            <td class="cell-amount">
+              <span class="amount-badge">₹ {{ donation.amount | number }}</span>
+            </td>
+            <td class="cell-date">
+              {{ donation.donationDate | date:'dd-MM-yyyy' }}
+            </td>
+            <td>
+              <button type="button"
+                      class="btn-show-charity" 
+                      (click)="showCharity(donation)" [disabled]="!donation.charity && !donation.charityId" 
+                      [title]="(!donation.charity && !donation.charityId) ? 'This charity has been removed' : 'View charity'">
+                <span>Show Charity</span>
+                <span class="btn-arrow">→</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="modal-overlay" *ngIf="showCharityModal" (click)="closeCharityModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-icon-wrapper">
+          <div class="modal-icon-bar"></div>
+        </div>
+        <h3 class="modal-title">Charity Details</h3>
+        <button type="button" class="btn-close-modal" (click)="closeCharityModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18" stroke-linecap="round"/>
+            <line x1="6" y1="6" x2="18" y2="18" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="detail-row">
+          <span class="detail-label">Charity Name</span>
+          <span class="detail-value">{{ selectedCharity?.charityName || 'N/A' }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Description</span>
+          <span class="detail-value description">{{ selectedCharity?.description || 'N/A' }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Founder</span>
+          <span class="detail-value">{{ selectedCharity?.founder || 'N/A' }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Creation Date</span>
+          <span class="detail-value">{{ selectedCharity?.creationDate | date:'dd-MM-yyyy' }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Status</span>
+          <span class="detail-value">
+            <span class="status-pill" [class.active]="selectedCharity?.status === 'Active'">
+              {{ selectedCharity?.status || 'N/A' }}
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-close-footer" (click)="closeCharityModal()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>

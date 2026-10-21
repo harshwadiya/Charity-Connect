@@ -1,0 +1,63 @@
+<nav class="navbar">
+
+  <div class="navbar-shine"></div>
+
+  <div class="brand" routerLink="/admin/dashboard" aria-label="CHARITY CONNECT">
+    <div class="brand-text">
+      <span class="brand-white">Charity</span>
+      <span class="brand-gold">Connect</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+
+    <li>
+      <a routerLink="/admin/dashboard" routerLinkActive="active" class="nav-link">Dashboard</a>
+    </li>
+    <li class="dropdown">
+      <a class="nav-link dropdown-toggle">Charities <span class="chevron"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a routerLink="/admin/charities/create" routerLinkActive="active" class="dropdown-item">Add Charity</a>
+        </li>
+        <li>
+          <a routerLink="/admin/charities" routerLinkActive="active" class="dropdown-item">View Charities</a>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <a routerLink="/admin/donations" routerLinkActive="active" class="nav-link">Donations</a>
+    </li>
+
+    <li>
+      <a routerLink="/admin/feedback" routerLinkActive="active" class="nav-link">Feedback</a>
+    </li>
+
+    <li>
+      <div class="admin-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text">Admin</span>
+      </div>
+    </li>
+    <li>
+      <button type="button" class="logout-btn" (click)="confirmLogout()">
+        Logout
+      </button>
+    </li>
+  </ul>
+</nav>
+
+<div class="modal-overlay" *ngIf="showLogoutModal" (click)="cancelLogout()">
+  <div class="modal-box" (click)="$event.stopPropagation()">
+    <div class="modal-icon">
+      <div class="modal-icon-bar"></div>
+    </div>
+    <h3 class="modal-title">Leaving Already?</h3>
+    <p class="modal-message">Are you sure you want to logout from the admin panel?</p>
+    <div class="modal-actions">
+      <button type="button" class="btn-confirm" (click)="logout()">Yes, Logout</button>
+      <button type="button" class="btn-cancel" (click)="cancelLogout()">Cancel</button>
+    </div>
+  </div>
+</div>

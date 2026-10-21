@@ -1,0 +1,58 @@
+<div class="viewalldonation-container">
+
+  <div class="page-header">
+    <h2 class="page-title" aria-label="All Donations">
+      <span class="title-white">All Donations</span>
+    </h2>
+    <hr class="title-underline" />
+  </div>
+
+  <div class="loading-state" *ngIf="isLoading">
+    <div class="loader-ring"></div>
+    <h5>Loading donations...</h5>
+  </div>
+
+  <div class="empty-state" *ngIf="!isLoading && donations.length === 0">
+    <h3 class="empty-title">Oops! No records Found</h3>
+    <p class="empty-message">No donations have been made yet.</p>
+  </div>
+<div class="table-wrapper" *ngIf="!isLoading && donations.length > 0">
+    <table class="donation-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Username</th>
+          <th>Charity Id</th>
+          <th>Amount</th>
+          <th>Donation Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let donation of donations; let i = index"
+            [style.animation-delay]="(i * 0.05) + 's'">
+
+          <td class="cell-id">{{ i + 1 }}</td>
+
+          <td class="cell-user">
+            <span class="user-chip">
+              <span class="chip-dot"></span>
+              {{ donation.user?.username || 'N/A' }}
+            </span>
+          </td>
+
+          <td class="cell-charity">
+            <span class="charity-chip">{{ donation.charityId || 'Deleted'}}</span>
+          </td>
+
+          <td class="cell-amount">
+            <span class="amount-badge">₹ {{ donation.amount | number }}</span>
+          </td>
+
+          <td class="cell-date">
+            {{ donation.donationDate | date:'dd-MM-yyyy' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

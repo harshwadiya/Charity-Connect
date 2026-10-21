@@ -1,0 +1,118 @@
+<div class="home-container">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+      <h1 class="hero-title">
+        Transforming Lives
+        <br />
+        Into <span class="gold">Lasting</span>
+        <br />
+        Impact
+      </h1>
+      <div class="hero-quote" [class.fade-out]="fadeState === 'out'">
+        <p class="quote-text">"{{ currentQuote.text }}"</p>
+        <p class="quote-author">&mdash; {{ currentQuote.author }}</p>
+      </div>
+      <div class="hero-actions">
+        <a routerLink="/login" class="btn-primary">Get Started &nbsp;&rarr;</a>
+        <a routerLink="/register" class="btn-ghost">Join as Donor</a>
+      </div>
+
+    </div>
+  </section>
+    
+<section #aboutSection id="about" class="about-section">
+
+  <div class="section-title">
+    <span>ABOUT US</span>
+    <h2>Creating Positive Change Together</h2>
+  </div>
+
+  <div class="about-cards">
+
+    <div class="about-card">
+      <div class="card-img-wrapper">
+        <img src="https://plus.unsplash.com/premium_photo-1733342422588-c2fc9e279836?q=80&w=869&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Connect">
+  
+      </div>
+      <h3>Connect</h3>
+      <p>Bringing donors and charitable organizations together through one secure platform.</p>
+    </div>
+
+    <div class="about-card">
+      <div class="card-img-wrapper">
+        <img src="https://images.unsplash.com/photo-1437914983566-976d85602771?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Support">
+      </div>
+      <h3>Support</h3>
+      <p>Helping people discover meaningful causes and contribute with confidence.</p>
+    </div>
+
+    <div class="about-card">
+      <div class="card-img-wrapper">
+        <img src="https://plus.unsplash.com/premium_photo-1683140538884-07fb31428ca6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Impact">
+      </div>
+      <h3>Impact</h3>
+      <p>Creating stronger communities through collective support and action.</p>
+    </div>
+
+  </div>
+
+  <div class="mission-box">
+    <h3 class="mission-text">Our Mission</h3>
+    <p>
+      Charity Connect is built to bring donors, volunteers and charitable organizations
+      together. Our mission is to make giving simpler, transparent and accessible so
+      every contribution creates a meaningful impact.
+    </p>
+  </div>
+
+</section> 
+  <section class="donation-cta">
+    <div class="cta-inner">
+      <h2 class="cta-heading">Every Rupee Makes a Difference</h2>
+      <p class="cta-subtitle">
+        Your generosity directly funds life-changing programs in communities
+        that need it most.
+      </p>
+
+      <div class="cta-tiers">
+        <span><strong></strong>School supplies for a child</span>
+        <span class="dot">&bull;</span>
+        <span><strong></strong>Clean water for a family</span>
+        <span class="dot">&bull;</span>
+        <span><strong></strong>Medical care for a village</span>
+      </div>
+
+      <a routerLink="/login" class="btn-donate">Donate Now &nbsp;</a>
+
+      <div class="cta-trust">
+        <span>100% Secure Transactions</span>
+        <span>Verified Charities Only</span>
+      </div>
+    </div>
+  </section>
+  <section class="faq-section">
+    <div class="faq-head">
+      <span class="pill dark">FAQ</span>
+      <h2 class="faq-title">Frequently Asked Questions</h2>
+      <p class="faq-subtitle">Find answers to common questions about donating and using Charity Connect.</p>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item" *ngFor="let faq of faqs; let i = index" [class.open]="faq.open">
+        <button class="faq-question" (click)="toggleFaq(i)">
+          <span>{{ faq.question }}</span>
+          <span class="faq-toggle">{{ faq.open ? '&minus;' : '+' }}</span>
+        </button>
+        <div class="faq-answer" [class.show]="faq.open">
+          <p>{{ faq.answer }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+

@@ -1,0 +1,71 @@
+<div class="myfeedback-container">
+  <div class="page-header">
+    
+    <h2 class="page-title">
+      <span class="title-white">My Feedback</span>
+    </h2>
+    <div class="title-underline"></div>
+  </div>
+
+  <div class="loading-state" *ngIf="isLoading">
+    <div class="loader-ring"></div>
+    <p>Loading your feedback...</p>
+  </div>
+
+  <div class="empty-state" *ngIf="!isLoading && feedbacks.length === 0">
+    <div class="empty-visual">
+      <div class="empty-circle"></div>
+      <div class="empty-line"></div>
+    </div>
+    <h3 class="empty-title">Oops! No records Found</h3>
+    <p class="empty-message">You haven't posted any feedback yet.</p>
+  </div>
+
+  <div class="table-wrapper" *ngIf="!isLoading && feedbacks.length > 0">
+    <table class="feedback-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Feedback</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of feedbacks; let i = index"
+            [style.animation-delay]="(i * 0.05) + 's'">
+          <td class="cell-id">#{{ i + 1 }}</td>
+          <td class="cell-feedback">{{ item.feedbackText }}</td>
+          <td>
+            <button class="btn-delete" (click)="openDeletePopup(item.feedbackId!)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal-overlay" *ngIf="showDeletePopup" (click)="cancelDelete()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <div class="modal-icon-wrapper">
+          <div class="modal-icon-bar"></div>
+        </div>
+        <h3 class="modal-title">Confirm Delete</h3>
+        <button class="btn-close-modal" (click)="cancelDelete()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="confirm-text">Are you sure you want to delete this feedback?</p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-modal-cancel" (click)="cancelDelete()">Cancel</button>
+        <button class="btn-modal-delete" (click)="confirmDelete()">Yes, Delete</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

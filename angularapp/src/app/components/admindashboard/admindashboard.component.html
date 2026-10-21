@@ -1,0 +1,49 @@
+<div class="dashboard-container">
+
+    <!-- HEADER -->
+    <div class="dashboard-header">
+      <h2>Admin Dashboard</h2>
+      <p class="subtitle">Overview of your platform at a glance</p>
+    </div>
+  
+    <!-- LOADING -->
+    <div *ngIf="isLoading" class="dashboard-loader">
+      <div class="spinner"></div>
+      <span>Loading stats...</span>
+    </div>
+  
+    <!-- STATS GRID -->
+    <div *ngIf="!isLoading" class="stats-grid">
+  
+      <div class="stat-card">
+        <div class="stat-label">Total Charities</div>
+        <div class="stat-value">{{ totalCharities }}</div>
+        <div class="stat-note">All registered charities</div>
+      </div>
+  
+      <div class="stat-card">
+        <div class="stat-label">Total Donations</div>
+        <div class="stat-value">&#8377;{{ totalDonations | number }}</div>
+        <div class="stat-note">Total amount received</div>
+      </div>
+  
+      <div class="stat-card">
+        <div class="stat-label">Total Feedback</div>
+        <div class="stat-value">{{ totalFeedback }}</div>
+        <div class="stat-note">User feedback received</div>
+      </div>
+  
+      <div class="stat-card">
+        <div class="stat-label">Active Charities</div>
+        <div class="stat-value">{{ activeCharities }}</div>
+        <div class="stat-note">Currently accepting donations</div>
+      </div>
+  
+      <div class="stat-card">
+        <div class="stat-label">This Month</div>
+        <div class="stat-value">&#8377;{{ thisMonthDonations | number }}</div>
+        <div class="stat-note">Donations in current month</div>
+      </div>
+  
+    </div>
+  </div>

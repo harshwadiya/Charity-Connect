@@ -1,0 +1,213 @@
+/* ==========================
+   USER ADD FEEDBACK
+========================== */
+
+.feedback-container{
+    min-height:100vh;
+    padding:140px 6% 80px;
+    background:
+    radial-gradient(circle at top left,#fff5dd 0%,transparent 30%),
+    radial-gradient(circle at top right,#fff1cc 0%,transparent 30%),
+    linear-gradient(to bottom,#ffffff,#faf8f2);
+    font-family:'Poppins',sans-serif;
+}
+
+/* HEADING */
+
+.feedback-container h2{
+    text-align:center;
+    font-size:42px;
+    color:#0d223f;
+    margin-bottom:40px;
+    position:relative;
+}
+
+.feedback-container h2::after{
+    content:'';
+    display:block;
+    width:70px;
+    height:4px;
+    background:#d8a126;
+    border-radius:3px;
+    margin:12px auto 0;
+}
+
+/* FEEDBACK CARD */
+
+.feedback-card{
+    max-width:700px;
+    margin:0 auto;
+    background:white;
+    padding:40px 45px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    animation:fadeInUp .5s ease;
+}
+
+@keyframes fadeInUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* FORM */
+
+.feedback-card label{
+    display:block;
+    color:#333;
+    font-weight:600;
+    margin-bottom:12px;
+    font-size:15px;
+}
+
+.required{
+    color:#c0392b;
+    margin-left:2px;
+}
+
+.feedback-card textarea{
+    width:100%;
+    padding:14px 16px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+    font-family:'Poppins',sans-serif;
+    outline:none;
+    resize:vertical;
+    min-height:180px;
+    transition:.3s;
+    background:#fdfcf7;
+}
+
+.feedback-card textarea:focus{
+    border-color:#d8a126;
+    box-shadow:0 0 0 3px rgba(216,161,38,.15);
+    background:white;
+}
+
+/* ERROR MESSAGE */
+
+.error-msg{
+    color:#c0392b;
+    font-size:13px;
+    margin-top:8px;
+    font-weight:500;
+}
+
+/* SUBMIT BUTTON */
+
+.submit-btn{
+    margin-top:20px;
+    background:#1e8a4c;
+    color:white;
+    border:none;
+    padding:11px 32px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    font-family:'Poppins',sans-serif;
+}
+
+.submit-btn:hover{
+    background:#166a3a;
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(30,138,76,.25);
+}
+
+/* ==========================
+   SUCCESS POPUP MODAL
+========================== */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(13,34,63,.55);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    animation:fadeIn .3s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+.modal-content{
+    background:white;
+    padding:40px 45px;
+    border-radius:24px;
+    text-align:center;
+    min-width:340px;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+    animation:popIn .4s ease;
+    border-top:5px solid #d8a126;
+}
+
+@keyframes popIn{
+    from{
+        opacity:0;
+        transform:translateY(-20px) scale(.95);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.modal-content h3{
+    color:#0d223f;
+    font-size:22px;
+    margin-bottom:25px;
+}
+
+.ok-btn{
+    background:#1e8a4c;
+    color:white;
+    border:none;
+    padding:11px 35px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    font-family:'Poppins',sans-serif;
+}
+
+.ok-btn:hover{
+    background:#166a3a;
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(30,138,76,.25);
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:768px){
+
+    .feedback-container{
+        padding:120px 4% 60px;
+    }
+
+    .feedback-container h2{
+        font-size:30px;
+    }
+
+    .feedback-card{
+        padding:30px 25px;
+    }
+
+    .modal-content{
+        padding:30px 25px;
+        min-width:280px;
+    }
+}

@@ -1,0 +1,41 @@
+<div class="dashboard-container">
+
+    <div class="page-header">
+      <h2 class="page-title">
+        <span class="title-white">Hello,</span>
+        <span class="title-gold">{{ username }}</span>
+      </h2>
+  
+      <p class="page-subtitle">Here's a quick snapshot of your giving journey</p>
+      <div class="title-underline"></div>
+    </div>
+    <div class="loading-state" *ngIf="isLoading">
+      <div class="loader-ring"></div>
+      <p>Loading your dashboard...</p>
+    </div>
+    <div class="stats-wrapper" *ngIf="!isLoading">
+  
+      <div class="stat-card">
+        <div class="stat-marker"></div>
+        <div class="stat-info">
+          <span class="stat-label">Charities Supported</span>
+          <span class="stat-value">{{ uniqueCharitiesCount }}</span>
+        </div>
+      </div>
+      <div class="stat-card highlight">
+        <div class="stat-marker gold"></div>
+        <div class="stat-info">
+          <span class="stat-label">Times Donated</span>
+          <span class="stat-value">{{ totalDonationsCount }}</span>
+        </div>
+      </div>
+  
+      <div class="stat-card">
+        <div class="stat-marker"></div>
+        <div class="stat-info">
+          <span class="stat-label">Total Contributed</span>
+          <span class="stat-value">₹ {{ totalMoneyDonated | number }}</span>
+        </div>
+      </div>
+    </div>
+  </div>

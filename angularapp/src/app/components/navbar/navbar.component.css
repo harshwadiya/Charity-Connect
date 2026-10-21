@@ -1,0 +1,377 @@
+/* ============ Import Font ============ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* ============ Host Scope ============ */
+:host {
+  font-family: 'Poppins', sans-serif;
+  display: block;
+}
+
+/* ============ FLOATING NAVBAR ============ */
+/* ============ FLOATING TRANSLUCENT NAVBAR ============ */
+:host .navbar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 90px;
+  z-index: 999;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: rgba(13, 34, 63, 0.45);          
+  backdrop-filter: blur(18px) saturate(180%);  
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border-bottom: 1px solid rgba(216, 161, 38, 0.15);
+
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+:host .navbar.scrolled {
+  height: 75px;
+  background: rgba(13, 34, 63, 0.92);          
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+@keyframes navGradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+
+/* Shine overlay */
+:host .navbar-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(216, 161, 38, 0.08),
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  animation: shineSweep 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shineSweep {
+  0%, 100% { left: -100%; }
+  50% { left: 100%; }
+}
+
+/* ============ BRAND ============ */
+:host .brand {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 2;
+  position: relative;
+  padding-left: 8px;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+}
+
+:host .brand::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 34px;
+  background: linear-gradient(180deg, #D4AF37, #e6c25a);
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(216, 161, 38, 0.5);
+  transition: all 0.4s ease;
+}
+
+:host .brand:hover {
+  transform: scale(1.04);
+}
+
+:host .brand:hover::before {
+  height: 44px;
+  box-shadow: 0 0 15px rgba(216, 161, 38, 0.8);
+}
+
+:host .brand-text {
+  display: flex;
+  gap: 8px;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-left: 14px;
+}
+
+:host .brand-white {
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+:host .brand-gold {
+  color: #D4AF37;
+  transition: transform 0.3s ease;
+}
+
+:host .brand:hover .brand-gold {
+  transform: translateY(-2px);
+  text-shadow: 0 4px 12px rgba(216, 161, 38, 0.5);
+}
+
+/* ============ NAV LINKS CONTAINER ============ */
+:host .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+}
+
+:host .nav-links li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============ NAV LINK (Home, About) ============ */
+:host .nav-link {
+  position: relative;
+  display: inline-block;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 8px 4px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Gold underline from center */
+:host .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #D4AF37, #f5c53d);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 8px rgba(216, 161, 38, 0.6);
+}
+
+:host .nav-link:hover {
+  color: #D4AF37 !important;
+  transform: translateY(-3px);
+  text-shadow: 0 4px 12px rgba(216, 161, 38, 0.4);
+}
+
+:host .nav-link:hover::after {
+  width: 100%;
+}
+
+/* Active link (gold with underline) */
+:host .nav-link.active {
+  color: #D4AF37 !important;
+}
+
+:host .nav-link.active::after {
+  width: 100%;
+}
+
+/* ============ AUTH BUTTONS (Login + Register — Gold) ============ */
+:host .auth-btn {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(135deg, #D4AF37 0%, #e6c25a 100%);
+  color: #ffffff !important;
+  padding: 12px 28px;
+  border-radius: 12px;
+  text-decoration: none !important;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  border: none;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 6px 20px rgba(216, 161, 38, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Shimmer effect on hover */
+:host .auth-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+:host .auth-btn:hover::before {
+  left: 100%;
+}
+
+:host .auth-btn:hover {
+  transform: translateY(-4px);
+  color: #ffffff !important;
+  box-shadow:
+    0 12px 30px rgba(216, 161, 38, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+:host .auth-btn:active {
+  transform: translateY(-2px);
+}
+
+/* ============ MOBILE HAMBURGER ============ */
+:host .mobile-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 12px;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 3;
+  transition: all 0.3s ease;
+}
+
+:host .mobile-toggle:hover {
+  background: rgba(216, 161, 38, 0.2);
+  border-color: #D4AF37;
+}
+
+:host .mobile-toggle span {
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:host .mobile-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+  background: #D4AF37;
+}
+
+:host .mobile-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+:host .mobile-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+  background: #D4AF37;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 992px) {
+  :host .navbar {
+    padding: 0 25px;
+    height: 80px;
+  }
+  :host .brand-text {
+    font-size: 28px;
+  }
+  :host .brand::before {
+    height: 28px;
+  }
+  :host .nav-link,
+  :host .auth-btn {
+    font-size: 16px;
+  }
+  :host .auth-btn {
+    padding: 10px 22px;
+  }
+  :host .nav-links {
+    gap: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  :host .navbar {
+    padding: 0 20px;
+    height: 70px;
+    width: 94%;
+    border-radius: 18px;
+  }
+
+  :host .brand-text {
+    font-size: 24px;
+    margin-left: 10px;
+  }
+
+  :host .brand::before {
+    height: 24px;
+    width: 3px;
+  }
+
+  :host .mobile-toggle {
+    display: flex;
+  }
+
+  :host .nav-links {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: linear-gradient(135deg, #0d223f, #193f69);
+    padding: 25px;
+    border-radius: 20px;
+    gap: 18px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  :host .nav-links.mobile-open {
+    max-height: 500px;
+    opacity: 1;
+    padding: 25px;
+  }
+
+  :host .nav-link,
+  :host .auth-btn {
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+    display: block;
+  }
+}
